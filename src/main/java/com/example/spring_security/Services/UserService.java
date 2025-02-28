@@ -35,4 +35,28 @@ public class UserService
         System.out.println("User details: "+user.toString());
         return  user;
     }
+
+    // update user
+    public User updateUser(String username, User updatedUser) {
+        for (int i = 0; i < list.size(); i++) {
+            User user = list.get(i);
+            if (user.getUsername().equals(username)) {
+                // Check if new username is already taken
+                if (updatedUser.getUsername() != null && !updatedUser.getUsername().equals(username)) {
+                    // Check if the new username is unique
+                    boolean usernameExists = list.stream()
+                            .anyMatch(existingUser -> existingUser.getUsername().equals(updatedUser.getUsername()));
+                    if (usernameExists) {
+                        return null; // Return null if the username already exists
+                    }
+                    user.setUsername(updatedUser.getUsername()); // Update username if it's unique
+                }
+                // Update the rest of the fields
+                user.setPassword(updatedUser.getPassword());
+                user.setEmail(updatedUser.getEmail());
+                return user;  // Return the updated user
+            }
+        }
+        return null; // Return null if user was not found
+    }
 }

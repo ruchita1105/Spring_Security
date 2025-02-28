@@ -35,6 +35,15 @@ public class UserController
     {
         return  this.userService.addUser(user);
     }
-
+    // Update an existing user
+    @PutMapping("/update/{username}")
+    public User updateUser(@PathVariable("username") String username, @RequestBody User updatedUser) {
+        User updated = this.userService.updateUser(username, updatedUser);
+        if (updated == null) {
+            // Return an error message if the username already exists
+            throw new RuntimeException("Username is already taken or user not found");
+        }
+        return updated;
+    }
 
 }
