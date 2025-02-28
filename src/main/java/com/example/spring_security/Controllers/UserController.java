@@ -16,7 +16,7 @@ public class UserController
 
 
     //all users
-    @GetMapping("/")
+    @GetMapping("/getAll")
     public List<User> getAllUsers()
     {
             return this.userService.getAllUsers();
@@ -30,7 +30,7 @@ public class UserController
 
     }
 
-    @PostMapping("/")
+    @PostMapping("/create")
     public  User add(@RequestBody User user)
     {
         return  this.userService.addUser(user);

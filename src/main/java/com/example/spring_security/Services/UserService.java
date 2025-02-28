@@ -32,6 +32,7 @@ public class UserService
     public User addUser(User user)
     {
         this.list.add(user);
+        System.out.println("User details: "+user.toString());
         return  user;
     }
 }
